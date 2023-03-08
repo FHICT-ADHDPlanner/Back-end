@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Evalynn Kootstra\\Documents\\GitHub\\Back-end\\ADHDPlanner-Backend\\ADHDPlanner-Backend\\ADHDPlanner-Backend.csproj": {}
+    "C:\\Users\\Evaly\\Git\\Back-end\\ADHDPlanner-Backend\\ADHDPlanner-Backend\\ADHDPlanner-Backend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Evalynn Kootstra\\Documents\\GitHub\\Back-end\\ADHDPlanner-Backend\\ADHDPlanner-Backend\\ADHDPlanner-Backend.csproj": {
+    "C:\\Users\\Evaly\\Git\\Back-end\\ADHDPlanner-Backend\\ADHDPlanner-Backend\\ADHDPlanner-Backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Evalynn Kootstra\\Documents\\GitHub\\Back-end\\ADHDPlanner-Backend\\ADHDPlanner-Backend\\ADHDPlanner-Backend.csproj",
+        "projectUniqueName": "C:\\Users\\Evaly\\Git\\Back-end\\ADHDPlanner-Backend\\ADHDPlanner-Backend\\ADHDPlanner-Backend.csproj",
         "projectName": "ADHDPlanner-Backend",
-        "projectPath": "C:\\Users\\Evalynn Kootstra\\Documents\\GitHub\\Back-end\\ADHDPlanner-Backend\\ADHDPlanner-Backend\\ADHDPlanner-Backend.csproj",
-        "packagesPath": "C:\\Users\\Evalynn Kootstra\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Evalynn Kootstra\\Documents\\GitHub\\Back-end\\ADHDPlanner-Backend\\ADHDPlanner-Backend\\obj\\",
+        "projectPath": "C:\\Users\\Evaly\\Git\\Back-end\\ADHDPlanner-Backend\\ADHDPlanner-Backend\\ADHDPlanner-Backend.csproj",
+        "packagesPath": "C:\\Users\\Evaly\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Evaly\\Git\\Back-end\\ADHDPlanner-Backend\\ADHDPlanner-Backend\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Evalynn Kootstra\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Evaly\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -91,7 +91,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -60,6 +60,9 @@ namespace ADHDPlanner_Backend.Controllers
 
             todoItem.Name = todoDTO.Name;
             todoItem.IsComplete = todoDTO.IsComplete;
+            todoItem.Duration = todoDTO.Duration;
+            todoItem.DueDate = todoDTO.DueDate;
+            todoItem.Description = todoDTO.Description;
 
             try
             {
@@ -80,7 +83,10 @@ namespace ADHDPlanner_Backend.Controllers
             var todoItem = new TodoItem
             {
                 IsComplete = todoDTO.IsComplete,
-                Name = todoDTO.Name
+                Name = todoDTO.Name,
+                Duration = todoDTO.Duration,
+                DueDate = todoDTO.DueDate,
+                Description = todoDTO.Description,
             };
 
             _context.TodoItems.Add(todoItem);
@@ -119,7 +125,10 @@ namespace ADHDPlanner_Backend.Controllers
            {
                Id = todoItem.Id,
                Name = todoItem.Name,
-               IsComplete = todoItem.IsComplete
+               IsComplete = todoItem.IsComplete,
+               Duration = todoItem.Duration,
+               DueDate = todoItem.DueDate,
+               Description = todoItem.Description
            };
     }
 }
