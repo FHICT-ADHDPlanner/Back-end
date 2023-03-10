@@ -2,6 +2,9 @@
 {
     public class TodoItemDTO
     {
+        /// <summary>
+        /// This does something
+        /// </summary>
         public long Id { get; set; }
         public string? Name { get; set; }
         public bool IsComplete { get; set; }

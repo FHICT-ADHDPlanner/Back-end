@@ -21,6 +21,12 @@ namespace ADHDPlanner_Backend.Controllers
         }
 
         // GET: api/TodoItems
+        /// <summary>
+        /// Get all tasks
+        /// </summary>
+        /// <remarks>
+        /// This endpint can be used to get all existing tasks.
+        /// </remarks>        
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TodoItemDTO>>> GetTodoItems()
         {
@@ -30,6 +36,11 @@ namespace ADHDPlanner_Backend.Controllers
         }
 
         // GET: api/TodoItems/5
+        /// <summary>
+        /// Get tasks by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<TodoItemDTO>> GetTodoItem(long id)
         {
@@ -44,6 +55,12 @@ namespace ADHDPlanner_Backend.Controllers
         }
 
         // PUT: api/TodoItems/5
+        /// <summary>
+        /// Update an existing task by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="todoDTO"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTodoItem(long id, TodoItemDTO todoDTO)
         {
@@ -77,7 +94,18 @@ namespace ADHDPlanner_Backend.Controllers
         }
 
         // POST: api/TodoItems
+        /// <summary>
+        /// Make a new task
+        /// </summary>
+        /// <remarks>
+        /// Create a new task with the given parameters. Parameters should be specified in the body of the message.
+        /// </remarks>
+        /// <param name="todoDTO">Specifies the parameters of the to be created task</param>
+        /// <response code="200">The task was sucessfully created</response>
+        /// <response code="400">An error was made with the given parameters. More context will be given in the body</response>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TodoItemDTO))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<TodoItemDTO>> PostTodoItem(TodoItemDTO todoDTO)
         {
             var todoItem = new TodoItem
@@ -100,6 +128,11 @@ namespace ADHDPlanner_Backend.Controllers
         // </snippet_Create>
 
         // DELETE: api/TodoItems/5
+        /// <summary>
+        /// Delete a task by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTodoItem(long id)
         {
