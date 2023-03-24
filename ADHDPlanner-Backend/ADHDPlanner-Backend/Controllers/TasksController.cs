@@ -9,13 +9,13 @@ using ADHDPlanner_Backend.Models;
 
 namespace ADHDPlanner_Backend.Controllers
 {
-    [Route("api/ToDoItems")]
+    [Route("api/Tasks")]
     [ApiController]
-    public class TodoItemsController : ControllerBase
+    public class TasksController : ControllerBase
     {
-        private readonly TodoContext _context;
+        private readonly TaskContext _context;
 
-        public TodoItemsController(TodoContext context)
+        public TasksController(TaskContext context)
         {
             _context = context;
         }
@@ -28,9 +28,9 @@ namespace ADHDPlanner_Backend.Controllers
         /// This endpint can be used to get all existing tasks.
         /// </remarks>        
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TodoItemDTO>>> GetTodoItems()
+        public async Task<ActionResult<IEnumerable<TaskDTO>>> GetTasks()
         {
-            return await _context.TodoItems
+            return await _context.Tasks
                 .Select(x => ItemToDTO(x))
                 .ToListAsync();
         }
@@ -42,16 +42,16 @@ namespace ADHDPlanner_Backend.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<TodoItemDTO>> GetTodoItem(long id)
+        public async Task<ActionResult<TaskDTO>> GetTask(long id)
         {
-            var todoItem = await _context.TodoItems.FindAsync(id);
+            var task = await _context.Tasks.FindAsync(id);
 
-            if (todoItem == null)
+            if (task == null)
             {
                 return NotFound();
             }
 
-            return ItemToDTO(todoItem);
+            return ItemToDTO(task);
         }
 
         // PUT: api/TodoItems/5
@@ -62,30 +62,30 @@ namespace ADHDPlanner_Backend.Controllers
         /// <param name="todoDTO"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTodoItem(long id, TodoItemDTO todoDTO)
+        public IActionResult PutTask(long id, TaskDTO taskDTO)
         {
-            if (id != todoDTO.Id)
+            if (id != taskDTO.Id)
             {
                 return BadRequest();
             }
 
-            var todoItem = await _context.TodoItems.FindAsync(id);
+            TaskModel todoItem = _context.Tasks.Where(x => x.Id == id).First();
             if (todoItem == null)
             {
                 return NotFound();
             }
 
-            todoItem.Name = todoDTO.Name;
-            todoItem.IsComplete = todoDTO.IsComplete;
-            todoItem.Duration = todoDTO.Duration;
-            todoItem.DueDate = todoDTO.DueDate;
-            todoItem.Description = todoDTO.Description;
+            todoItem.Name = taskDTO.Name;
+            todoItem.IsComplete = taskDTO.IsComplete;
+            todoItem.Duration = taskDTO.Duration;
+            todoItem.DueDate = taskDTO.DueDate;
+            todoItem.Description = taskDTO.Description;
 
             try
             {
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
-            catch (DbUpdateConcurrencyException) when (!TodoItemExists(id))
+            catch (DbUpdateConcurrencyException) when (!TaskExists(id))
             {
                 return NotFound();
             }
@@ -100,30 +100,30 @@ namespace ADHDPlanner_Backend.Controllers
         /// <remarks>
         /// Create a new task with the given parameters. Parameters should be specified in the body of the message.
         /// </remarks>
-        /// <param name="todoDTO">Specifies the parameters of the to be created task</param>
+        /// <param name="taskDTO">Specifies the parameters of the to be created task</param>
         /// <response code="200">The task was sucessfully created</response>
         /// <response code="400">An error was made with the given parameters. More context will be given in the body</response>
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TodoItemDTO))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TaskDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<TodoItemDTO>> PostTodoItem(TodoItemDTO todoDTO)
+        public async Task<ActionResult<TaskDTO>> PostTask(TaskDTO taskDTO)
         {
-            var todoItem = new TodoItem
+            var task = new TaskModel
             {
-                IsComplete = todoDTO.IsComplete,
-                Name = todoDTO.Name,
-                Duration = todoDTO.Duration,
-                DueDate = todoDTO.DueDate,
-                Description = todoDTO.Description,
+                IsComplete = taskDTO.IsComplete,
+                Name = taskDTO.Name,
+                Duration = taskDTO.Duration,
+                DueDate = taskDTO.DueDate,
+                Description = taskDTO.Description,
             };
 
-            _context.TodoItems.Add(todoItem);
+            _context.Tasks.Add(task);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(
-                nameof(GetTodoItem),
-                new { id = todoItem.Id },
-                ItemToDTO(todoItem));
+                nameof(GetTask),
+                new { id = task.Id },
+                ItemToDTO(task));
         }
         // </snippet_Create>
 
@@ -134,34 +134,34 @@ namespace ADHDPlanner_Backend.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTodoItem(long id)
+        public async Task<IActionResult> DeleteTask(long id)
         {
-            var todoItem = await _context.TodoItems.FindAsync(id);
-            if (todoItem == null)
+            var task = await _context.Tasks.FindAsync(id);
+            if (task == null)
             {
                 return NotFound();
             }
 
-            _context.TodoItems.Remove(todoItem);
+            _context.Tasks.Remove(task);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool TodoItemExists(long id)
+        private bool TaskExists(long id)
         {
-            return _context.TodoItems.Any(e => e.Id == id);
+            return _context.Tasks.Any(e => e.Id == id);
         }
 
-        private static TodoItemDTO ItemToDTO(TodoItem todoItem) =>
-           new TodoItemDTO
+        private static TaskDTO ItemToDTO(TaskModel task) =>
+           new TaskDTO
            {
-               Id = todoItem.Id,
-               Name = todoItem.Name,
-               IsComplete = todoItem.IsComplete,
-               Duration = todoItem.Duration,
-               DueDate = todoItem.DueDate,
-               Description = todoItem.Description
+               Id = task.Id,
+               Name = task.Name,
+               IsComplete = task.IsComplete,
+               Duration = task.Duration,
+               DueDate = task.DueDate,
+               Description = task.Description
            };
     }
 }

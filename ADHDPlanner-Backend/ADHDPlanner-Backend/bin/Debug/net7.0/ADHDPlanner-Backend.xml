@@ -4,7 +4,7 @@
         <name>ADHDPlanner-Backend</name>
     </assembly>
     <members>
-        <member name="M:ADHDPlanner_Backend.Controllers.TodoItemsController.GetTodoItems">
+        <member name="M:ADHDPlanner_Backend.Controllers.TasksController.GetTasks">
             <summary>
             Get all tasks
             </summary>
@@ -12,14 +12,14 @@
             This endpint can be used to get all existing tasks.
             </remarks>        
         </member>
-        <member name="M:ADHDPlanner_Backend.Controllers.TodoItemsController.GetTodoItem(System.Int64)">
+        <member name="M:ADHDPlanner_Backend.Controllers.TasksController.GetTask(System.Int64)">
             <summary>
             Get tasks by id
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:ADHDPlanner_Backend.Controllers.TodoItemsController.PutTodoItem(System.Int64,ADHDPlanner_Backend.Models.TodoItemDTO)">
+        <member name="M:ADHDPlanner_Backend.Controllers.TasksController.PutTask(System.Int64,ADHDPlanner_Backend.Models.TaskDTO)">
             <summary>
             Update an existing task by id
             </summary>
@@ -27,27 +27,27 @@
             <param name="todoDTO"></param>
             <returns></returns>
         </member>
-        <member name="M:ADHDPlanner_Backend.Controllers.TodoItemsController.PostTodoItem(ADHDPlanner_Backend.Models.TodoItemDTO)">
+        <member name="M:ADHDPlanner_Backend.Controllers.TasksController.PostTask(ADHDPlanner_Backend.Models.TaskDTO)">
             <summary>
             Make a new task
             </summary>
             <remarks>
             Create a new task with the given parameters. Parameters should be specified in the body of the message.
             </remarks>
-            <param name="todoDTO">Specifies the parameters of the to be created task</param>
+            <param name="taskDTO">Specifies the parameters of the to be created task</param>
             <response code="200">The task was sucessfully created</response>
             <response code="400">An error was made with the given parameters. More context will be given in the body</response>
         </member>
-        <member name="M:ADHDPlanner_Backend.Controllers.TodoItemsController.DeleteTodoItem(System.Int64)">
+        <member name="M:ADHDPlanner_Backend.Controllers.TasksController.DeleteTask(System.Int64)">
             <summary>
             Delete a task by id
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="P:ADHDPlanner_Backend.Models.TodoItemDTO.Id">
+        <member name="P:ADHDPlanner_Backend.Models.TaskDTO.Id">
             <summary>
-            This does something
+            Task parameters
             </summary>
         </member>
     </members>
