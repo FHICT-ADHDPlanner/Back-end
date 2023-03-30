@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using DataLayer.Context;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ADHDPlanner_Backend.Models;
@@ -28,11 +29,13 @@ namespace ADHDPlanner_Backend.Controllers
         /// This endpint can be used to get all existing tasks.
         /// </remarks>        
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TaskDTO>>> GetTasks()
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<TaskModel>))]
+        public ActionResult GetTasks()
         {
-            return await _context.Tasks
+           List<TaskDTO> tasks = _context.Tasks
                 .Select(x => ItemToDTO(x))
-                .ToListAsync();
+                .ToList();
+            return Ok(tasks);
         }
 
         // GET: api/TodoItems/5
@@ -42,16 +45,17 @@ namespace ADHDPlanner_Backend.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<TaskDTO>> GetTask(long id)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<TaskModel>))]
+        public ActionResult GetTask(long id)
         {
-            var task = await _context.Tasks.FindAsync(id);
+            var task = _context.Tasks.FindAsync(id);
 
             if (task == null)
             {
                 return NotFound();
             }
 
-            return ItemToDTO(task);
+            return Ok(task);
         }
 
         // PUT: api/TodoItems/5
@@ -62,6 +66,7 @@ namespace ADHDPlanner_Backend.Controllers
         /// <param name="todoDTO"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult PutTask(long id, TaskDTO taskDTO)
         {
             if (id != taskDTO.Id)
@@ -106,7 +111,7 @@ namespace ADHDPlanner_Backend.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TaskDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<TaskDTO>> PostTask(TaskDTO taskDTO)
+        public IActionResult PostTask(TaskDTO taskDTO)
         {
             var task = new TaskModel
             {
@@ -118,7 +123,7 @@ namespace ADHDPlanner_Backend.Controllers
             };
 
             _context.Tasks.Add(task);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
             return CreatedAtAction(
                 nameof(GetTask),
@@ -134,16 +139,16 @@ namespace ADHDPlanner_Backend.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTask(long id)
+        public IActionResult DeleteTask(long id)
         {
-            var task = await _context.Tasks.FindAsync(id);
+            var task = _context.Tasks.Find(id);
             if (task == null)
             {
                 return NotFound();
             }
 
             _context.Tasks.Remove(task);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
             return NoContent();
         }

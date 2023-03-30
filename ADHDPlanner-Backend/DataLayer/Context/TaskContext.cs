@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace ADHDPlanner_Backend.Models
+namespace DataLayer.Context
 {
     public class TaskContext : DbContext
     {

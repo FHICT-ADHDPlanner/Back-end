@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using DataLayer.Context;
 using ADHDPlanner_Backend.Models;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
@@ -35,10 +36,11 @@ builder.Services.AddCors(opt =>
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddDbContext<TaskContext>(opt =>
-    opt.UseInMemoryDatabase("TodoList"));
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("PlannerDatabase"))
+);
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(opt => {
-
     opt.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
@@ -52,6 +54,19 @@ builder.Services.AddSwaggerGen(opt => {
 });
 
 var app = builder.Build();
+
+try
+{
+    using (IServiceScope serviceScope = app.Services.GetService<IServiceScopeFactory>().CreateScope())
+    {
+        DbContext context = serviceScope.ServiceProvider.GetRequiredService<TaskContext>();
+        context.Database.EnsureCreated();
+        context.Database.Migrate();
+    }
+} catch (Exception e)
+{
+    Console.WriteLine("Migration failed: " + e.ToString());
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

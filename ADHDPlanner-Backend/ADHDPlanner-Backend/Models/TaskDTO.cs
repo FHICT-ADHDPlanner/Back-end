@@ -11,6 +11,6 @@
         public int? Duration { get; set; }
         public string? Description { get; set; }
         public DateTime? DueDate { get; set; }
-        public List<Task> Subtasks { get; set; }
+        public List<TaskDTO> Subtasks { get; set; }
     }
 }

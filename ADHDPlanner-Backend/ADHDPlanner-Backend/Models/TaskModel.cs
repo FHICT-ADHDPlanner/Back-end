@@ -1,35 +1,36 @@
-﻿namespace ADHDPlanner_Backend.Models
-{
-    public class TaskModel
-    {
-        public long Id { get; set; }
-        public string? Name { get; set; }
-        public bool IsComplete { get; set; }
-        public int? Duration { get; set; }
-        public string? Description { get; set; }
-        public DateTime? DueDate { get; set; }
-        public List<TaskModel> Subtasks { get; set; }
+﻿//namespace ADHDPlanner_Backend.Models
+//{
+//    public class TaskModel
+//    {
+//        public long Id { get; set; }
+//        public string? Name { get; set; }
+//        public bool IsComplete { get; set; }
+//        public int? Duration { get; set; }
+//        public string? Description { get; set; }
+//        public DateTime? DueDate { get; set; }
 
-        public TaskModel(int id, string name, bool isComplete, int duration, string description, DateTime dueDate)
-        {
-            Id = id;
-            Name = name;
-            IsComplete = isComplete;
-            Duration = duration;
-            Description = description;
-            DueDate = dueDate;
+//        public List<TaskModel> Subtasks { get; set; }
 
-            Subtasks = new List<TaskModel>();
-        }
+//        public TaskModel(int id, string name, bool isComplete, int duration, string description, DateTime dueDate)
+//        {
+//            Id = id;
+//            Name = name;
+//            IsComplete = isComplete;
+//            Duration = duration;
+//            Description = description;
+//            DueDate = dueDate;
 
-        public TaskModel()
-        {
-            Subtasks = new List<TaskModel>();
-        }
+//            Subtasks = new List<TaskModel>();
+//        }
 
-        public void AddSubtask(TaskModel subtask)
-        {
-            Subtasks.Add(subtask);
-        }
-    }
-}
+//        public TaskModel()
+//        {
+//            Subtasks = new List<TaskModel>();
+//        }
+
+//        public void AddSubtask(TaskModel subtask)
+//        {
+//            Subtasks.Add(subtask);
+//        }
+//    }
+//}
