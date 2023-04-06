@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Http;
 using DataLayer.Context;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ADHDPlanner_Backend.Models;
+using InterfaceLayer;
+using DataLayer;
+using InterfaceLayer.Interfaces;
 
 namespace ADHDPlanner_Backend.Controllers
 {
@@ -15,9 +17,11 @@ namespace ADHDPlanner_Backend.Controllers
     public class TasksController : ControllerBase
     {
         private readonly TaskContext _context;
+        private readonly ITaskCollection _taskDatabase;
 
-        public TasksController(TaskContext context)
+        public TasksController(TaskContext context, ITaskCollection taskDatabase)
         {
+            _taskDatabase = taskDatabase;
             _context = context;
         }
 
@@ -32,9 +36,7 @@ namespace ADHDPlanner_Backend.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<TaskModel>))]
         public ActionResult GetTasks()
         {
-           List<TaskDTO> tasks = _context.Tasks
-                .Select(x => ItemToDTO(x))
-                .ToList();
+            List<TaskDTO> tasks = _taskDatabase.GetAllTasks();
             return Ok(tasks);
         }
 

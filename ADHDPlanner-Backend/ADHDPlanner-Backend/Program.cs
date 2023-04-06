@@ -7,6 +7,8 @@ using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Http.Json;
 using MvcJsonOptions = Microsoft.AspNetCore.Mvc.JsonOptions;
+using DataLayer;
+using InterfaceLayer.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,6 +40,8 @@ builder.Services.AddCors(opt =>
 builder.Services.AddDbContext<TaskContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("PlannerDatabase"))
 );
+
+builder.Services.AddScoped<ITaskCollection, TaskDatabase>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(opt => {

@@ -1,4 +1,4 @@
-﻿namespace ADHDPlanner_Backend.Models
+﻿namespace InterfaceLayer
 {
     public class TaskDTO
     {
