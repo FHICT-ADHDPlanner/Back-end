@@ -48,9 +48,9 @@ namespace ADHDPlanner_Backend.Controllers
         /// <returns></returns>
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<TaskModel>))]
-        public ActionResult GetTask(long id)
+        public ActionResult GetTask(int id)
         {
-            var task = _context.Tasks.FindAsync(id);
+            TaskDTO task = _taskDatabase.GetTask(id);
 
             if (task == null)
             {
@@ -69,30 +69,10 @@ namespace ADHDPlanner_Backend.Controllers
         /// <returns></returns>
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult PutTask(long id, TaskDTO taskDTO)
+        public IActionResult PutTask(int id, TaskDTO taskDTO)
         {
-            if (id != taskDTO.Id)
-            {
-                return BadRequest();
-            }
-
-            TaskModel todoItem = _context.Tasks.Where(x => x.Id == id).First();
-            if (todoItem == null)
-            {
-                return NotFound();
-            }
-
-            todoItem.Name = taskDTO.Name;
-            todoItem.IsComplete = taskDTO.IsComplete;
-            todoItem.Duration = taskDTO.Duration;
-            todoItem.DueDate = taskDTO.DueDate;
-            todoItem.Description = taskDTO.Description;
-
-            try
-            {
-                _context.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException) when (!TaskExists(id))
+            bool todoItem = _taskDatabase.UpdateTask(id, taskDTO);
+            if (todoItem == false)
             {
                 return NotFound();
             }
@@ -115,22 +95,9 @@ namespace ADHDPlanner_Backend.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult PostTask(TaskDTO taskDTO)
         {
-            var task = new TaskModel
-            {
-                IsComplete = taskDTO.IsComplete,
-                Name = taskDTO.Name,
-                Duration = taskDTO.Duration,
-                DueDate = taskDTO.DueDate,
-                Description = taskDTO.Description,
-            };
+            TaskDTO todoItem = _taskDatabase.CreateTask(taskDTO);
 
-            _context.Tasks.Add(task);
-            _context.SaveChanges();
-
-            return CreatedAtAction(
-                nameof(GetTask),
-                new { id = task.Id },
-                ItemToDTO(task));
+            return Ok(todoItem);
         }
         // </snippet_Create>
 
@@ -141,18 +108,15 @@ namespace ADHDPlanner_Backend.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        public IActionResult DeleteTask(long id)
+        public IActionResult DeleteTask(int id)
         {
-            var task = _context.Tasks.Find(id);
-            if (task == null)
+            bool state = _taskDatabase.DeleteTask(id);
+
+            if (!state)
             {
                 return NotFound();
             }
-
-            _context.Tasks.Remove(task);
-            _context.SaveChanges();
-
-            return NoContent();
+            return Ok();
         }
 
         private bool TaskExists(long id)

@@ -28,6 +28,64 @@ namespace DataLayer
             return tasks;
         }
 
+        public TaskDTO? GetTask(int id)
+        {
+            TaskDTO? task = _context.Tasks.Where(x => x.Id == id).Select(x => ItemToDTO(x)).FirstOrDefault();
+
+            return task;
+        }
+
+        public bool UpdateTask(int id, TaskDTO task)
+        {
+            TaskModel? todoItem = _context.Tasks.Where(x => x.Id == id).FirstOrDefault();
+
+            if (todoItem == null)
+            {
+                return false;
+            }
+
+            todoItem.Name = task.Name;
+            todoItem.IsComplete = task.IsComplete;
+            todoItem.Duration = task.Duration;
+            todoItem.DueDate = task.DueDate;
+            todoItem.Description = task.Description;
+
+            _context.SaveChanges();
+
+            return _context.SaveChanges() > 0;
+        }
+
+        public TaskDTO CreateTask(TaskDTO taskDTO)
+        {
+            TaskModel task = new TaskModel();
+
+            task.IsComplete = taskDTO.IsComplete;
+            task.Name = taskDTO.Name;
+            task.Duration = taskDTO.Duration;
+            task.DueDate = taskDTO.DueDate;
+            task.Description = taskDTO.Description;
+
+
+            _context.Tasks.Add(task);
+            _context.SaveChanges();
+
+            return taskDTO;
+        }
+
+        public bool DeleteTask(int id)
+        {
+            TaskModel? todoItem = _context.Tasks.Where(x => x.Id == id).FirstOrDefault();
+
+            if (todoItem == null)
+            {
+                return false;
+            }
+
+            _context.Tasks.Remove(todoItem);
+
+            return _context.SaveChanges() > 0;
+        }
+
         private static TaskDTO ItemToDTO(TaskModel task) =>
            new TaskDTO
            {
