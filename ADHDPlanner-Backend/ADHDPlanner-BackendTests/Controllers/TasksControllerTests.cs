@@ -23,10 +23,10 @@ namespace ADHDPlanner_Backend.Controllers.Tests
             _controller = new TasksController(null, _mockDatabase);
         }
 
-        [TestMethod()]
-        public void GetTaskTest()
-        {
-            Assert.Fail();
-        }
+        //[TestMethod()]
+        //public void GetTaskTest()
+        //{
+        //    Assert.Fail();
+        //}
     }
 }
