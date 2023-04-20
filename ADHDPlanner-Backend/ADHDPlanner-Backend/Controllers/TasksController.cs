@@ -12,7 +12,7 @@ using InterfaceLayer.Interfaces;
 
 namespace ADHDPlanner_Backend.Controllers
 {
-    [Route("api/Tasks")]
+    [Route("api/Task")]
     [ApiController]
     public class TasksController : ControllerBase
     {
@@ -33,7 +33,7 @@ namespace ADHDPlanner_Backend.Controllers
         /// This endpint can be used to get all existing tasks.
         /// </remarks>        
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<TaskModel>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<TaskDTO>))]
         public ActionResult GetTasks()
         {
             List<TaskDTO> tasks = _taskDatabase.GetAllTasks();
@@ -47,7 +47,7 @@ namespace ADHDPlanner_Backend.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<TaskModel>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TaskDTO))]
         public ActionResult GetTask(int id)
         {
             TaskDTO task = _taskDatabase.GetTask(id);

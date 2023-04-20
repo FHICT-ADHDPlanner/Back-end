@@ -12,14 +12,14 @@
             This endpint can be used to get all existing tasks.
             </remarks>        
         </member>
-        <member name="M:ADHDPlanner_Backend.Controllers.TasksController.GetTask(System.Int64)">
+        <member name="M:ADHDPlanner_Backend.Controllers.TasksController.GetTask(System.Int32)">
             <summary>
             Get tasks by id
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:ADHDPlanner_Backend.Controllers.TasksController.PutTask(System.Int64,ADHDPlanner_Backend.Models.TaskDTO)">
+        <member name="M:ADHDPlanner_Backend.Controllers.TasksController.PutTask(System.Int32,InterfaceLayer.TaskDTO)">
             <summary>
             Update an existing task by id
             </summary>
@@ -27,7 +27,7 @@
             <param name="todoDTO"></param>
             <returns></returns>
         </member>
-        <member name="M:ADHDPlanner_Backend.Controllers.TasksController.PostTask(ADHDPlanner_Backend.Models.TaskDTO)">
+        <member name="M:ADHDPlanner_Backend.Controllers.TasksController.PostTask(InterfaceLayer.TaskDTO)">
             <summary>
             Make a new task
             </summary>
@@ -38,17 +38,12 @@
             <response code="200">The task was sucessfully created</response>
             <response code="400">An error was made with the given parameters. More context will be given in the body</response>
         </member>
-        <member name="M:ADHDPlanner_Backend.Controllers.TasksController.DeleteTask(System.Int64)">
+        <member name="M:ADHDPlanner_Backend.Controllers.TasksController.DeleteTask(System.Int32)">
             <summary>
             Delete a task by id
             </summary>
             <param name="id"></param>
             <returns></returns>
-        </member>
-        <member name="P:ADHDPlanner_Backend.Models.TaskDTO.Id">
-            <summary>
-            Task parameters
-            </summary>
         </member>
     </members>
 </doc>
