@@ -67,17 +67,18 @@ namespace ADHDPlanner_Backend.Controllers
         /// <param name="id"></param>
         /// <param name="todoDTO"></param>
         /// <returns></returns>
-        [HttpPut("{id}")]
+        [HttpPut()]
+        [Route("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult PutTask(int id, TaskDTO taskDTO)
         {
-            bool todoItem = _taskDatabase.UpdateTask(id, taskDTO);
-            if (todoItem == false)
+            TaskDTO todoItem = _taskDatabase.UpdateTask(id, taskDTO);
+            if (todoItem == null)
             {
                 return NotFound();
             }
 
-            return NoContent();
+            return Ok(todoItem);
         }
 
         // POST: api/TodoItems

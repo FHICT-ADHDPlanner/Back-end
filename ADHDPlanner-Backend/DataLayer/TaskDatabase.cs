@@ -35,13 +35,13 @@ namespace DataLayer
             return task;
         }
 
-        public bool UpdateTask(int id, TaskDTO task)
+        public TaskDTO? UpdateTask(int id, TaskDTO task)
         {
             TaskModel? todoItem = _context.Tasks.Where(x => x.Id == id).FirstOrDefault();
 
             if (todoItem == null)
             {
-                return false;
+                return null;
             }
 
             todoItem.Name = task.Name;
@@ -50,9 +50,11 @@ namespace DataLayer
             todoItem.DueDate = task.DueDate;
             todoItem.Description = task.Description;
 
-            _context.SaveChanges();
-
-            return _context.SaveChanges() > 0;
+            if (_context.SaveChanges() > 0)
+            {
+                return task;
+            }
+            return null;
         }
 
         public TaskDTO CreateTask(TaskDTO taskDTO)

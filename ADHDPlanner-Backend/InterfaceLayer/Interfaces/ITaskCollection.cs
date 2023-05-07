@@ -6,7 +6,7 @@ namespace InterfaceLayer.Interfaces
     {
         List<TaskDTO> GetAllTasks();
         TaskDTO? GetTask(int id);
-        bool UpdateTask(int id, TaskDTO task);
+        TaskDTO? UpdateTask(int id, TaskDTO task);
         TaskDTO CreateTask(TaskDTO task);
         bool DeleteTask(int id);
     }
