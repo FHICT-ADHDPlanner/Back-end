@@ -29,17 +29,18 @@ namespace ADHDPlanner_BackendTests.Mock
             return Tasks.Find(x => x.Id == id);
         }
 
-        public bool UpdateTask(int id, TaskDTO task)
+        public TaskDTO? UpdateTask(int id, TaskDTO task)
         {
             TaskDTO? dto = Tasks.Find(x => x.Id == id);
 
             if (dto == null)
-                return false;
-
-
+            {
+                return null;
+            }
+    
             dto.Name = task.Name;
 
-            return true;
+            return dto;
         }
 
         public TaskDTO CreateTask(TaskDTO task)
