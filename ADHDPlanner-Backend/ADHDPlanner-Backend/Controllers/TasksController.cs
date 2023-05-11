@@ -94,6 +94,7 @@ namespace ADHDPlanner_Backend.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TaskDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Route("")]
         public IActionResult PostTask(TaskDTO taskDTO)
         {
             TaskDTO todoItem = _taskDatabase.CreateTask(taskDTO);
