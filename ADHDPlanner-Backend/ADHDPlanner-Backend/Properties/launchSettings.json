@@ -5,7 +5,8 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ConnectionStrings__PlannerDatabase": "Server=robinvanhoof.tech,1434;Database=PlannerDatabase;User=sa;Password=R9QgoT#Pm8;TrustServerCertificate=true;"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:1001"
