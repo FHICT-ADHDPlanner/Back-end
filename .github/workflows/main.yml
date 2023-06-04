@@ -16,7 +16,6 @@ jobs:
       with: 
        dotnet-version: |
         7.0.x
-        4.7.2  
     - name: Restore dependencies
       run: dotnet restore "./ADHDPlanner-Backend" 
     - name: Build
