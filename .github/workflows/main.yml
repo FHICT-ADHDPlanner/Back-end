@@ -18,7 +18,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore "./ADHDPlanner-Backend" 
     - name: Build
-      run: dotnet build --no-restore "./ADHDPlanner-Backend"
+      run: dotnet build --no-restore --configuration Debug "./ADHDPlanner-Backend" 
     - name: Test
       run: dotnet test --no-build --verbosity normal "./ADHDPlanner-Backend"
 
