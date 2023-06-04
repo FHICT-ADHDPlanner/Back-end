@@ -1,11 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
 
-namespace ADHDPlanner_Backend_Tests
+namespace ADHDPlanner_BackendTest
 {
     [TestClass]
     public class IntegrationTests
@@ -49,7 +44,7 @@ namespace ADHDPlanner_Backend_Tests
             var client = new HttpClient();
             client.Timeout = TimeSpan.FromSeconds(10000);
             var request = new HttpRequestMessage(HttpMethod.Put, "http://robinvanhoof.tech:1001/api/Task/2");
-            var content = new StringContent("{\r\n    \"id\": 3,\r\n    \"name\": \"" + name  + "\",\r\n    \"isComplete\": false,\r\n    \"duration\": 10,\r\n    \"description\": \"Vacuum the livingroom\",\r\n    \"dueDate\": \"2023-05-15T12:38:20.103Z\",\r\n    \"subtasks\": [\r\n        null\r\n    ]\r\n}", null, "application/json");
+            var content = new StringContent("{\r\n    \"id\": 3,\r\n    \"name\": \"" + name + "\",\r\n    \"isComplete\": false,\r\n    \"duration\": 10,\r\n    \"description\": \"Vacuum the livingroom\",\r\n    \"dueDate\": \"2023-05-15T12:38:20.103Z\",\r\n    \"subtasks\": [\r\n        null\r\n    ]\r\n}", null, "application/json");
 
             request.Content = content;
             var response = await client.SendAsync(request);
